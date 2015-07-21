@@ -1,4 +1,4 @@
-# bash-common-parse-options(1) -- echos input
+# parse-options(1) -- echos input
 
 ## SYNOPSIS
 `bash-common-parse-options` [`-o`|`--output` .]  <text><br>

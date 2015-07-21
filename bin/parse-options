@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -o errexit
+set -o nounset
+# set -o xtrace
+set -o pipefail
+
+declare -A name_lookup
+declare -A has_param_lookup
+getopt_short=''
+getopt_long=''
+
+while [[ ${#} -gt 0 ]]
+do
+	option=${1}
+	shift
+
+	if [[ $option = '--' ]]
+	then
+		break
+	fi
+
+	[[ $option =~ (.+):(.)(=)? ]]
+	long_name=${BASH_REMATCH[1]}
+	short_name=${BASH_REMATCH[2]}
+	has_param=${BASH_REMATCH[3]}
+
+	name_lookup["--${long_name}"]=$long_name
+	name_lookup["-${short_name}"]=$long_name
+	has_param_lookup[$long_name]=$has_param
+
+	if [[ $has_param ]]
+	then
+		getopt_short="${getopt_short}${short_name}:"
+		getopt_long="${getopt_long},${long_name}:"
+	else
+		getopt_short="${getopt_short}${short_name}"
+		getopt_long="${getopt_long},${long_name}"
+	fi
+done
+
+args=$(getopt -o "$getopt_short" -l "$getopt_long" -- "${@}")
+eval set -- $args
+
+output=''
+while [[ ${#} -gt 0 ]]
+do
+	if [[ ${1} = '--' ]]
+	then
+		break
+	fi
+
+	long_name=${name_lookup[${1}]}
+
+	if [[ ${has_param_lookup[$long_name]} ]]
+	then
+		output="${output};$(printf '%q=%q' "${long_name}" "${2}")"
+		shift 2
+	else
+		output="${output};$(printf '%q=%q' "${long_name}" 'yes')"
+		shift
+	fi
+done
+
+printf "$output"
