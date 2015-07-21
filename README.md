@@ -1,8 +1,8 @@
 # bash-common-parse-options
 An easier way to parse CLI options for Bash scripts
 
-* [docs](doc/transmission-get.md)
-* [code](bin/transmission-get)
+* [docs](doc/parse-options.md)
+* [code](bin/parse-options)
 
 ## Installing
 If the target machine is running [Arch Linux](https://www.archlinux.org/),
