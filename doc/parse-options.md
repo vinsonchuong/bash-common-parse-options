@@ -1,7 +1,7 @@
 # parse-options(1) -- parse CLI options
 
 ## SYNOPSIS
-`parse-options` _OPTION_... -- _ARGUMENT_... <br>
+`parse-options` _OPTION_... `--` _ARGUMENT_... <br>
 
 ## DESCRIPTION
 `parse-options` is a wrapper around `getopt` that provides an easier interface
