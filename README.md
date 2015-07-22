@@ -1,4 +1,6 @@
 # bash-common-parse-options
+[![Build Status](https://travis-ci.org/vinsonchuong/bash-common-parse-options.svg?branch=master)](https://travis-ci.org/vinsonchuong/bash-common-parse-options)
+
 An easier way to parse CLI options for Bash scripts
 
 * [docs](doc/parse-options.md)
