@@ -8,6 +8,7 @@ declare -A name_lookup
 declare -A has_param_lookup
 getopt_short=''
 getopt_long=''
+output=''
 
 while [[ ${#} -gt 0 ]]
 do
@@ -36,12 +37,13 @@ do
 		getopt_short="${getopt_short}${short_name}"
 		getopt_long="${getopt_long},${long_name}"
 	fi
+
+	output="${output}${long_name}=;"
 done
 
 args=$(getopt -o "$getopt_short" -l "$getopt_long" -- "${@}")
 eval set -- $args
 
-output=''
 while [[ ${#} -gt 0 ]]
 do
 	if [[ ${1} = '--' ]]
@@ -53,10 +55,10 @@ do
 
 	if [[ ${has_param_lookup[$long_name]} ]]
 	then
-		output="${output};$(printf '%q=%q' "${long_name}" "${2}")"
+		output="${output}$(printf '%q=%q' "${long_name}" "${2}");"
 		shift 2
 	else
-		output="${output};$(printf '%q=%q' "${long_name}" 'yes')"
+		output="${output}$(printf '%q=%q' "${long_name}" 'yes');"
 		shift
 	fi
 done
