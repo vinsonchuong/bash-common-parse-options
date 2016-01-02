@@ -39,7 +39,7 @@ Parse long boolean options:
   flag set
 
 ## COPYRIGHT
-`bash-common-parse-options` is Copyright (c) 2015 Vinson Chuong under The MIT
+`bash-common-parse-options` is Copyright (c) 2016 Vinson Chuong under The MIT
 License.
 
 ## SEE ALSO
